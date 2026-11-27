@@ -40,13 +40,8 @@
   grid-template-rows: 1fr auto;
   gap: 12px;
   padding: clamp(14px, 2vw, 24px);
-  border: 1px solid rgb(255 255 255 / 32%);
-  border-radius: 12px;
-  background: rgb(14 14 14 / 82%);
   color: #fff;
-  box-shadow: 0 8px 28px rgb(0 0 0 / 22%);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  text-shadow: 0 1px 3px #151515, 0 0 5px rgb(0 0 0 / 80%);
 }
 .band-link-card > p {
   margin: 0;

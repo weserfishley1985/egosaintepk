@@ -26,10 +26,13 @@
   color: #fff;
   --line: rgb(255 255 255 / 24%);
   background: linear-gradient(105deg, rgb(0 0 0 / 42%), rgb(0 0 0 / 22%)),
-    url("images/shows-texture-full.jpg") center / cover no-repeat #151719;
+    url("images/shows-dark-waves.webp") center / cover no-repeat #151719;
 }
 .show-schedule.motion-panel::before {
   inset: 4% 0;
+}
+.show-schedule.motion-panel::before,
+.band-link-card {
   background: linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(16 20 24 / 18%));
   border: 1px solid rgb(255 255 255 / 26%);
   border-radius: 12px;
