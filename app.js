@@ -229,11 +229,15 @@ const musicButton = document.querySelector('.hero-audio');
 function startNativeMusic(autoplay) {
   let restoreSound = false;
   mediaDialog.addEventListener('player-open', () => {
-    restoreSound = !music.muted;
+    restoreSound = !music.muted && (autoplay || !music.paused);
+    if (!autoplay) music.pause();
     music.muted = true;
   });
   mediaDialog.addEventListener('player-close', () => {
-    if (restoreSound) music.muted = false;
+    if (restoreSound) {
+      music.muted = false;
+      if (!autoplay && music.paused) music.play().catch(updateLabel);
+    }
     restoreSound = false;
   });
   function updateLabel() {
@@ -250,7 +254,7 @@ function startNativeMusic(autoplay) {
       return;
     }
 
-    if (!music.hasAttribute('src')) music.src = music.dataset.src;
+    if (music.error) music.load();
     music.muted = false;
     try {
       await music.play();
@@ -259,7 +263,11 @@ function startNativeMusic(autoplay) {
     }
   });
 
-  if (!autoplay) return;
+  if (!autoplay) {
+    music.preload = 'metadata';
+    music.src = music.dataset.src;
+    return;
+  }
 
   function startMusicOnClick(event) {
     if (music.paused && !musicButton.contains(event.target)) music.play().catch(() => {});
@@ -273,64 +281,6 @@ function startNativeMusic(autoplay) {
   music.src = music.dataset.src;
 }
 
-async function startBufferedMusic(AudioContext) {
-  // The static host returns the full MP3 even when a player asks for a byte range.
-  const context = new AudioContext();
-  try {
-    await context.resume();
-    const response = await fetch(music.dataset.src);
-    if (!response.ok) throw new Error('Could not load the background track.');
-
-    const track = context.createBufferSource();
-    const volume = context.createGain();
-    const galleryVolume = context.createGain();
-    track.buffer = await context.decodeAudioData(await response.arrayBuffer());
-    track.loop = music.loop;
-    track.connect(volume);
-    volume.connect(galleryVolume);
-    galleryVolume.connect(context.destination);
-    galleryVolume.gain.value = mediaDialog.querySelector('video, audio') ? 0 : 1;
-    mediaDialog.addEventListener('player-open', () => { galleryVolume.gain.value = 0; });
-    mediaDialog.addEventListener('player-close', () => { galleryVolume.gain.value = 1; });
-    track.start();
-
-    return async (muted) => {
-      volume.gain.value = muted ? 0 : 1;
-      if (!muted && context.state !== 'running') await context.resume();
-    };
-  } catch (error) {
-    await context.close().catch(() => {});
-    throw error;
-  }
-}
-
-function enableBufferedMusic(AudioContext) {
-  let setMuted;
-  let muted = true;
-
-  musicButton.addEventListener('click', async () => {
-    musicButton.disabled = true;
-    if (!setMuted) musicButton.textContent = 'Loading audio…';
-
-    try {
-      if (setMuted) await setMuted(!muted);
-      else setMuted = await startBufferedMusic(AudioContext);
-
-      muted = !muted;
-      musicButton.textContent = muted ? 'Unmute' : 'Mute';
-    } catch {
-      musicButton.textContent = muted ? 'Retry audio' : 'Mute';
-    } finally {
-      musicButton.disabled = false;
-    }
-  });
-}
-
 const mobileMusic = matchMedia('(max-width: 700px), (pointer: coarse)').matches;
-const BufferedAudioContext = window.AudioContext || window.webkitAudioContext;
 musicButton.hidden = false;
-if (mobileMusic && BufferedAudioContext) {
-  enableBufferedMusic(BufferedAudioContext);
-} else {
-  startNativeMusic(!mobileMusic);
-}
+startNativeMusic(!mobileMusic);
