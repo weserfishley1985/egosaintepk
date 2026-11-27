@@ -68,9 +68,7 @@
 .skull-logo {
   display: block;
   aspect-ratio: 1188 / 1324;
-  background: currentColor;
-  mask: url("images/egosaint-skull.webp") center / contain no-repeat;
-  mask-mode: luminance;
+  background: transparent url("images/egosaint-skull-transparent.png") center / contain no-repeat;
 }
 
 /* The artwork sits right of center within the supplied canvas. */
