@@ -192,6 +192,10 @@
 }
 
 @media (max-width: 700px) {
+  #about {
+    background-size: cover, auto 180%;
+    background-position: center, center bottom;
+  }
   .live-feature { height: max(560px, 108svh); min-height: max-content; }
   .live-feature > picture { height: 100lvh; }
   .live-feature > .feature-copy {
