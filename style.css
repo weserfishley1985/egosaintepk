@@ -141,6 +141,12 @@
   padding-top: 12px;
 }
 .band-lineup dt { font-weight: 600; }
+.band-lineup .member-photo {
+  display: block;
+  width: min(100%, 148px);
+  height: auto;
+  margin-bottom: 10px;
+}
 .band-lineup dd {
   margin: 4px 0 0;
   color: #67685d;
