@@ -32,7 +32,8 @@
   inset: 4% 0;
 }
 .show-schedule.motion-panel::before,
-.band-link-card {
+.band-link-card,
+.about-panel {
   background: linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(16 20 24 / 18%));
   border: 1px solid rgb(255 255 255 / 26%);
   border-radius: 12px;
@@ -45,7 +46,27 @@
 }
 .statement.motion-panel { --panel-color: #e2e0e5; }
 .statement.motion-panel::before { inset: 2% 16% 13%; }
-.about.motion-panel::before { right: 45%; }
+#about {
+  display: block;
+  padding: clamp(40px, 7vw, 112px) 6%;
+  color: #fff;
+  --line: rgb(255 255 255 / 24%);
+  background: linear-gradient(rgb(0 0 0 / 42%), rgb(0 0 0 / 42%)),
+    url("images/meet-the-band-hexagons.webp") center / cover no-repeat #141414;
+}
+.about-panel {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: clamp(18px, 4vw, 56px);
+}
+.about-panel > .eyebrow {
+  font-size: 12px;
+  margin: 0 0 16px;
+}
+#about .about-panel > p,
+#about .band-lineup dd { color: inherit; }
+.about-panel > p:not(.eyebrow),
+.about-panel .band-lineup { max-width: 100%; }
 .contact.motion-panel { background: #e4e6da; --panel-color: #d6dac7; }
 .contact.motion-panel::before { inset: 8% 3%; }
 
@@ -179,7 +200,6 @@
   }
   .statement-background { padding-top: 70px; }
   .statement.motion-panel::before { inset: 2% 3% 9%; }
-  .about.motion-panel::before { right: 30%; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
