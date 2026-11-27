@@ -213,26 +213,24 @@
   }
 }
 @media (max-aspect-ratio: 1/1) {
-  .band-portrait img { height: auto; }
+  .band-portrait img { height: auto; min-height: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .band-section {
-    min-height: 0;
+    min-height: 100svh;
     gap: 18px;
     padding: 0 0 18px;
   }
   .band-section > .band-portrait {
-    position: static;
-    grid-area: 1 / 1;
-    place-self: start stretch;
+    position: absolute;
+    inset: 0;
   }
   .band-links {
     width: min(calc(100% - 36px), 840px);
     margin-top: 18px;
   }
   .band-portrait img {
-    height: auto;
-    max-height: 75svh;
+    height: 100%;
   }
   .band-bio {
     width: min(calc(100% - 36px), 420px);
