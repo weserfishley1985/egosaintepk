@@ -183,6 +183,20 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  [data-open-contact], header nav a[href="#contact"] { position: relative; }
+  [data-open-contact]::after, header nav a[href="#contact"]::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 999px;
+    pointer-events: none;
+    animation: contact-pulse 1.4s ease-out infinite;
+  }
+  header nav a[href="#contact"]::after { inset: -4px -6px; }
+  @keyframes contact-pulse {
+    0% { box-shadow: 0 0 0 0 currentColor, 0 0 0 0 currentColor; opacity: .55; }
+    80%, 100% { box-shadow: -6px 0 0 2px currentColor, 6px 0 0 2px currentColor; opacity: 0; }
+  }
   header, footer { overflow-x: clip; }
   .show-schedule.motion-panel::before { translate: 0 calc(var(--panel-drift, 0px) * .32); }
   [data-reveal] {
