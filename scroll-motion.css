@@ -196,7 +196,7 @@
   header nav a[href="#contact"]::after { inset: -4px -6px; }
   @keyframes contact-pulse {
     0% { box-shadow: 0 0 0 0 currentColor, 0 0 0 0 currentColor; opacity: .7; }
-    35% { opacity: .48; }
+    35% { background-color: rgb(220 115 115 / 34%); opacity: .48; }
     85%, 100% { box-shadow: -9px 0 2px 3px currentColor, 9px 0 2px 3px currentColor; opacity: 0; }
   }
   header, footer { overflow-x: clip; }
