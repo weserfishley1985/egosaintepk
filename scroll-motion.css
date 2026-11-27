@@ -22,7 +22,20 @@
   background: var(--panel-color, #e5e5de);
   translate: 0 var(--panel-drift, 0px);
 }
-.show-schedule.motion-panel::before { inset: 4% 0; }
+#shows {
+  color: #fff;
+  --line: rgb(255 255 255 / 24%);
+  background: linear-gradient(105deg, rgb(0 0 0 / 42%), rgb(0 0 0 / 22%)),
+    url("images/shows-texture.webp") center / cover no-repeat #151719;
+}
+.show-schedule.motion-panel::before {
+  inset: 4% 0;
+  background: linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(16 20 24 / 18%));
+  border: 1px solid rgb(255 255 255 / 26%);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
 .statement-background {
   background: #000;
   padding-top: 100px;
