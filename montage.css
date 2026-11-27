@@ -1,0 +1,157 @@
+.hero-montage,
+.montage-frame {
+  position: absolute;
+  inset: 0;
+}
+
+.montage-frame {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  visibility: hidden;
+}
+
+.montage-frame.is-current {
+  visibility: visible;
+}
+
+.montage-frame picture {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.montage-frame img { display: block; }
+.montage-opening { grid-template-columns: 44% 56%; }
+.montage-opening picture:first-child img { object-position: 64% 27%; }
+.montage-opening picture:last-child img { object-position: 68% center; }
+.montage-split { grid-template-columns: 39% 61%; }
+.montage-split picture:first-child img { object-position: 48% 32%; }
+.montage-split picture:last-child img { object-position: 43% 23%; }
+.montage-wide img { object-position: center 37%; }
+.montage-triptych { grid-template-columns: 18% 61% 21%; }
+.montage-triptych picture:first-child img { object-position: 25% center; }
+.montage-triptych picture:nth-child(2) img { object-position: 37% 37%; }
+.montage-triptych picture:last-child img { object-position: 74% center; }
+.montage-blue { grid-template-columns: 43% 57%; }
+.montage-blue picture:first-child img { object-position: 68% center; }
+.montage-blue picture:last-child img { object-position: 56% 32%; }
+.montage-finale { grid-template-columns: 64% 36%; }
+.montage-finale picture:first-child img { object-position: 63% center; }
+.montage-finale picture:last-child img { object-position: 26% center; }
+.montage-red { grid-template-columns: 36% 64%; }
+.montage-red picture:first-child img { object-position: 50% 24%; }
+.montage-red picture:last-child img { object-position: 34% 22%; }
+.montage-details { grid-template-columns: 26% 50% 24%; }
+.montage-details picture:first-child img { object-position: 34% 53%; }
+.montage-details picture:nth-child(2) img { object-position: 36% 28%; }
+.montage-details picture:last-child img { object-position: 62% center; }
+.montage-yard img { object-position: 48% 64%; }
+.montage-rhythm { grid-template-columns: 42% 58%; }
+.montage-rhythm picture:first-child img { object-position: 64% 52%; }
+.montage-rhythm picture:last-child img { object-position: 72% 30%; }
+.montage-portraits { grid-template-columns: 22% 56% 22%; }
+.montage-portraits picture:first-child img { object-position: 53% 30%; }
+.montage-portraits picture:nth-child(2) img { object-position: 26% 20%; }
+.montage-portraits picture:last-child img { object-position: 47% 24%; }
+.montage-encore { grid-template-columns: 56% 44%; }
+.montage-encore picture:first-child img { object-position: 48% 58%; }
+.montage-encore picture:last-child img { object-position: 78% 53%; }
+
+.hero .hero-title h1 {
+  width: clamp(180px, min(43vw, 69svh), 625px);
+  padding: 0;
+  line-height: 0;
+  filter: drop-shadow(0 3px 15px rgb(0 0 0 / 62%));
+}
+
+.skull-logo {
+  display: block;
+  aspect-ratio: 1188 / 1324;
+  background: currentColor;
+  mask: url("images/egosaint-skull.webp") center / contain no-repeat;
+  mask-mode: luminance;
+}
+
+/* The artwork sits right of center within the supplied canvas. */
+.hero .skull-logo { translate: -6.5% 0; }
+
+.hero-audio {
+  position: absolute;
+  z-index: 2;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: 12px;
+}
+.hero-audio, .booking-contact {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #fff;
+  border-radius: 100px;
+  background: rgb(0 0 0 / 30%);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  color: #fff;
+  font-size: .875rem;
+}
+
+.hero-audio:focus-visible {
+  outline-color: #fff;
+  outline-offset: 3px;
+}
+.booking-contact {
+  align-self: flex-start;
+  padding-inline: 22px;
+  background-color: rgb(0 0 0 / 63%);
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+  .hero-audio { right: max(12px, env(safe-area-inset-right)); }
+}
+
+header {
+  background: #000;
+  color: #fff;
+}
+
+.header-wordmark {
+  display: block;
+  width: clamp(125px, 15vw, 190px);
+  aspect-ratio: 720 / 171;
+  background: currentColor;
+  mask: url("images/egosaint-logo-720.webp") center / contain no-repeat;
+}
+
+footer {
+  background: #000;
+  color: #fff;
+}
+
+.footer-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.footer-signature a { display: inline-flex; align-items: center; min-height: 32px; }
+.footer-signature img { display: block; width: 100px; height: auto; filter: brightness(0) invert(1); }
+
+@media (max-width: 700px) {
+  header { gap: 18px; }
+  .hero {
+    height: clamp(290px, 52svh, 440px);
+    min-height: 0;
+  }
+  .hero-title { padding-top: 0; }
+  .hero .hero-title h1 { width: min(76vw, 37svh, 320px); }
+  .hero .skull-logo { translate: none; }
+  .montage-opening { grid-template-columns: 36% 64%; }
+  .montage-split { grid-template-columns: 42% 58%; }
+  .montage-wide img { object-position: 56% center; }
+  .montage-triptych { grid-template-columns: 15% 70% 15%; }
+  .montage-blue { grid-template-columns: 32% 68%; }
+  .montage-details { grid-template-columns: 20% 63% 17%; }
+  .montage-yard img { object-position: 39% center; }
+  .montage-portraits { grid-template-columns: 16% 64% 20%; }
+}

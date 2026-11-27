@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Booking confirmation | egosaint</title>
+<p>Message has been sent. <a href="./">Return to egosaint</a></p>
+<script>
+  if (window.parent !== window) {
+    window.parent.postMessage('egosaint-booking-received', location.origin);
+  } else {
+    location.replace('./?booking=sent');
+  }
+</script>
+</html>
