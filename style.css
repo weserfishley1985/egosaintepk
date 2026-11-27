@@ -24,6 +24,20 @@
 }
 .show-schedule li + li { border-top: 1px solid var(--line); }
 .show-schedule strong { font-weight: 600; }
+.show-schedule .show-with-logo {
+  position: relative;
+  min-height: 56px;
+  align-items: center;
+}
+.show-with-logo > span { padding-right: 60px; }
+.show-with-logo .venue-logo {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: auto;
+}
 
 .band-links {
   position: relative;
