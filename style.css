@@ -172,7 +172,12 @@
   gap: 12px;
   width: min(100%, 420px);
   padding: clamp(16px, 2.2vw, 32px);
-  background: #e5e5de;
+  color: #fff;
+  background: rgb(0 0 0 / 64%);
+  border: 1px solid rgb(255 255 255 / 26%);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 .band-bio h2 {
   margin: 0;
@@ -180,7 +185,7 @@
   font-weight: 400;
   letter-spacing: -.035em;
 }
-.band-bio-copy { margin: 0; color: var(--ink); font-size: 1rem; line-height: 1.55; }
+.band-bio-copy { margin: 0; font-size: 1rem; line-height: 1.55; }
 .booking-form { display: grid; gap: 1rem; }
 .booking-form label { display: grid; gap: .35rem; }
 .booking-form :is(input, select, textarea) {
