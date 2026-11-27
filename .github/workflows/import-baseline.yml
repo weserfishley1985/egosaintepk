@@ -1,0 +1,22 @@
+name: Import the EPK baseline
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-baseline.yml']
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import verified public release
+        run: |
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/epk.zip" https://github.com/weserfishley1985/egosaintepk/releases/download/v1.0.0/egosaintepk.zip
+          echo "e8608c446e38ff60584b4fda40b18900df911991abfdfb3601fccf03096299e2  $RUNNER_TEMP/epk.zip" | sha256sum --check
+          unzip -oq "$RUNNER_TEMP/epk.zip"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- .
+          git commit -m "Publish the egosaint EPK site files"
+          git push origin HEAD:main
