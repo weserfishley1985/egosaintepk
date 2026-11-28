@@ -1,4 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600&family=Playfair+Display:ital,wght@1,400&display=swap');
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('fonts/dm-sans.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('fonts/playfair-display-italic.ttf') format('truetype');
+}
+
 
 #shows-title {
   align-self: start;

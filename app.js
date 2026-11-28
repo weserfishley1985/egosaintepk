@@ -139,8 +139,6 @@ const emailLink = contactDialog.querySelector('.direct-email a');
 const confirmation = document.querySelector('#message-sent');
 const bookingStatus = document.querySelector('#booking-status');
 let returnHomeTimer;
-let lastPayload;
-let submissionId;
 
 function showReceipt() {
   if (contactDialog.open) contactDialog.close();
@@ -158,37 +156,13 @@ confirmation.addEventListener('close', () => {
 emailLink.addEventListener('click', () => {
   const fields = new FormData(bookingForm);
   const body = [fields.get('message'), fields.get('name'), fields.get('email')].filter(Boolean).join('\n\n');
-  emailLink.href = 'mailto:egosaintmusic@gmail.com?subject=' + encodeURIComponent(fields.get('_subject')) +
+  emailLink.href = 'mailto:egosaintmusic@gmail.com?subject=' + encodeURIComponent(fields.get('subject')) +
     '&body=' + encodeURIComponent(body);
 });
-
-async function forwardSavedInquiry(formId, fields, id) {
-  if (!/^[a-z0-9]{8,32}$/i.test(formId ?? '')) return;
-  const data = new URLSearchParams({
-    name: fields.name, email: fields.email, message: fields.message, subject: fields._subject
-  });
-  let deliveryStatus = 'browser_unconfirmed';
-  try {
-    const response = await fetch('https://formspree.io/f/' + formId, {
-      method: 'POST', body: data, headers: { Accept: 'application/json' }, keepalive: true
-    });
-    if (response.ok && (await response.json()).ok === true) deliveryStatus = 'browser_accepted';
-  } catch {
-    // The inquiry is already saved if the visitor loses their connection.
-  }
-  await fetch(bookingForm.action, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, deliveryStatus }), keepalive: true
-  }).catch(() => {});
-}
 
 bookingForm.addEventListener('submit', async event => {
   event.preventDefault();
   if (sendButton.disabled) return;
-  const fields = Object.fromEntries(new FormData(bookingForm));
-  const payload = JSON.stringify(fields);
-  if (lastPayload !== payload) submissionId = crypto.randomUUID();
-  lastPayload = payload;
   sendButton.disabled = true;
   sendButton.textContent = 'Sending…';
   bookingStatus.textContent = '';
@@ -197,14 +171,12 @@ bookingForm.addEventListener('submit', async event => {
   try {
     const res = await fetch(bookingForm.action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...fields, id: submissionId, browserDelivery: true }),
+      headers: { Accept: 'application/json' },
+      body: new FormData(bookingForm),
       signal: controller.signal
     });
-    const saved = await res.json();
-    if (!res.ok || saved.success !== true) throw new Error('Unconfirmed save');
-    if (saved.formId) void forwardSavedInquiry(saved.formId, fields, submissionId);
-    lastPayload = null;
+    const receipt = await res.json();
+    if (!res.ok || receipt.ok !== true) throw new Error('Unconfirmed submission');
     bookingForm.reset();
     showReceipt();
   } catch {

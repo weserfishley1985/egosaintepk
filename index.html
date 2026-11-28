@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="egosaint — an exploration of image, object and atmosphere. Creative direction and photography portfolio concept."><meta name="theme-color" content="#eeeee8"><title>egosaint — Image & Direction</title><link rel="stylesheet" href="style.css?v=member-photos"><link rel="stylesheet" href="montage.css"><link rel="stylesheet" href="scroll-motion.css?v=emblem-black-waves"></head>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="egosaint — an exploration of image, object and atmosphere. Creative direction and photography portfolio concept."><meta name="theme-color" content="#eeeee8"><title>egosaint — Image & Direction</title><link rel="stylesheet" href="style.css?v=local-fonts"><link rel="stylesheet" href="montage.css"><link rel="stylesheet" href="scroll-motion.css?v=emblem-black-waves"></head>
 <body>
 <header>
   <a class="wordmark" href="#" aria-label="egosaint home" data-reveal="left">
@@ -310,13 +310,13 @@
   </div>
   <nav class="show-playlist" id="brew-playlist" aria-label="Brew show media" hidden>
     <a href="images/live/brew-flyer.webp" data-media="photo" data-title="Brew Coffee &amp; Tap House · July 25" data-alt="egosaint show flyer for Brew Coffee &amp; Tap House in Independence, Oregon, July 25, 7–9 pm">Show flyer</a>
-    <a href="https://egosaintepk.taylor-metal-1153.chatgpt.site/media/brew/low.mp4" data-media="video">Low</a>
-    <a href="https://egosaintepk.taylor-metal-1153.chatgpt.site/media/brew/go-with-the-flow.mp4" data-media="video">Go with the Flow</a>
-    <a href="https://egosaintepk.taylor-metal-1153.chatgpt.site/media/brew/live-clip.mp4" data-media="video">Brew show clip</a>
+    <a href="media/brew/low.mp4" data-media="video">Low</a>
+    <a href="media/brew/go-with-the-flow.mp4" data-media="video">Go with the Flow</a>
+    <a href="media/brew/live-clip.mp4" data-media="video">Brew show clip</a>
   </nav>
   <nav class="show-playlist" id="mac-playlist" aria-label="Mac Club show media" hidden>
     <a href="images/mac-club/show-flyer.webp" data-media="photo" data-title="The Mac Club · October 17, 2026" data-alt="egosaint concert flyer for The Mac Club in McMinnville on October 17, 2026">Show flyer</a>
-    <a href="https://egosaintepk.taylor-metal-1153.chatgpt.site/media/mac-club/recap.mp4" data-media="video">Show recap</a>
+    <a href="media/mac-club/recap.mp4" data-media="video">Show recap</a>
     <button type="button" id="browse-mac-photos" aria-controls="mac-photos" aria-expanded="false">Browse photos</button>
   </nav>
   <nav class="show-playlist" id="pink-playlist" aria-label="Pink Elephant show media" hidden>
@@ -324,7 +324,7 @@
     <button type="button" id="browse-pink-photos" aria-controls="pink-photos" aria-expanded="false">Browse photos</button>
   </nav>
   <nav class="show-playlist" id="yard-playlist" aria-label="The Yard show media" hidden>
-    <a href="https://egosaintepk.taylor-metal-1153.chatgpt.site/media/yard/live.mp4" data-media="video" data-title="egosaint live at The Yard · June 27, 2026">Watch video</a>
+    <a href="media/yard/live.mp4" data-media="video" data-title="egosaint live at The Yard · June 27, 2026">Watch video</a>
     <button type="button" aria-controls="yard-photos" aria-expanded="false">Browse photos</button>
   </nav>
   <div id="yard-photos" class="photo-grid" data-title="Photos from The Yard Food Park" hidden>
@@ -473,11 +473,11 @@
   <button type="button" class="dialog-close" aria-label="Close contact form">Close ×</button>
   <div class="contact-dialog-content">
     <h2 id="contact-title">Contact egosaint</h2>
-    <form class="booking-form" action="https://egosaintepk.taylor-metal-1153.chatgpt.site/api/contact" method="post">
-      <input type="text" name="_honey" hidden tabindex="-1" autocomplete="off">
+    <form class="booking-form" action="https://formspree.io/f/mnpdrwlk" method="post">
+      <input type="text" name="_gotcha" hidden tabindex="-1" autocomplete="off">
       <label>Your name<input name="name" autocomplete="name" maxlength="120" required></label>
       <label>Your email<input type="email" name="email" autocomplete="email" maxlength="254" required></label>
-      <label>Subject<select name="_subject">
+      <label>Subject<select name="subject">
         <option>Booking inquiry</option>
         <option>General message</option>
       </select></label>
@@ -496,7 +496,7 @@
     <p>Thanks for reaching out. Returning to the homepage…</p>
   </div>
 </dialog>
-<script src="app.js"></script>
+<script src="app.js?v=direct-booking"></script>
 <script src="montage.js"></script>
 <script src="scroll-motion.js"></script>
 </body></html>
