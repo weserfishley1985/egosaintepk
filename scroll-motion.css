@@ -44,7 +44,7 @@
   display: grid;
   place-items: center;
   min-height: clamp(280px, 38vw, 620px);
-  background: #111619 url("images/band-emblem-background.webp?v=horizon") center / cover no-repeat;
+  background: #111619 url("images/band-emblem-background.webp?v=black-waves") center / cover no-repeat;
 }
 .band-emblem > img {
   display: block;
