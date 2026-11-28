@@ -73,8 +73,22 @@
 #about .band-lineup dd { color: inherit; }
 .about-panel > p:not(.eyebrow),
 .about-panel .band-lineup { max-width: 100%; }
-.contact.motion-panel { background: #e4e6da; --panel-color: #d6dac7; }
-.contact.motion-panel::before { inset: 8% 3%; }
+.contact.motion-panel {
+  color: #fff;
+  background: linear-gradient(90deg, rgb(8 9 19 / 72%), transparent 80%),
+    url("images/contact-waves.webp") center 53% / cover no-repeat #191b30;
+}
+.contact.motion-panel::before { content: none; }
+#contact .contact-button {
+  color: #fff;
+  border-color: currentColor;
+  background: rgb(12 13 24 / 58%);
+}
+#contact .contact-button:is(:hover, :focus-visible) {
+  color: #181322;
+  background: #fff;
+}
+#contact .contact-note { color: inherit; }
 
 .live-feature {
   display: grid;
