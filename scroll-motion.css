@@ -44,11 +44,11 @@
   display: grid;
   place-items: center;
   min-height: clamp(280px, 38vw, 620px);
-  background: #111619 url("images/band-emblem-background.webp") center / cover no-repeat;
+  background: #111619 url("images/band-emblem-background.webp?v=chevrons") center / cover no-repeat;
 }
 .band-emblem > img {
   display: block;
-  width: clamp(112px, 16vw, 240px);
+  width: min(86%, clamp(246px, 34vw, 560px));
   height: auto;
 }
 #about {
