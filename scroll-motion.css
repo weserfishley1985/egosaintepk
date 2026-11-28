@@ -51,6 +51,12 @@
   padding: clamp(40px, 7vw, 112px) 6%;
   color: #fff;
   --line: rgb(255 255 255 / 24%);
+  background-color: #141414;
+}
+#about::before {
+  content: "";
+  z-index: -1;
+  pointer-events: none;
   background: linear-gradient(var(--about-shade, rgb(0 0 0 / 42%)), var(--about-shade, rgb(0 0 0 / 42%))),
     url("images/meet-the-band-hexagons.webp") center / cover no-repeat #141414;
 }
@@ -82,7 +88,8 @@
   clip-path: inset(0);
 }
 
-.fixed-photo-section > picture {
+.fixed-photo-section > picture,
+#about::before {
   position: fixed;
   inset: 0;
 }
@@ -192,7 +199,8 @@
 }
 
 @media (max-width: 700px) {
-  #about {
+  #about::before {
+    height: 100lvh;
     --about-shade: rgb(0 0 0 / 14%);
     background-size: cover, auto 145%;
     background-position: center, 16% top;
