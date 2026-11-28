@@ -1,0 +1,44 @@
+name: Prepare EPK media
+on:
+  push:
+    branches: [prepare-epk-media]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare the five show videos and two fonts
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install --no-install-recommends -y ffmpeg
+          mkdir -p media/{brew,mac-club,yard} fonts
+          for clip in brew/low brew/go-with-the-flow brew/live-clip mac-club/recap yard/live; do
+            source="$RUNNER_TEMP/input.mp4"
+            curl -fLsS --retry 3 -A 'Mozilla/5.0' "https://egosaintepk.taylor-metal-1153.chatgpt.site/media/$clip.mp4" -o "$source"
+            case "$clip" in
+              brew/low) size=1280:720; bitrate=2350k; max=2550k; audio=(-c:a copy);;
+              brew/go-with-the-flow) size=1920:1080; bitrate=3650k; max=4000k; audio=(-c:a copy);;
+              brew/live-clip) size=1080:1920; bitrate=4700k; max=5500k; audio=(-c:a aac -b:a 192k);;
+              *) cp "$source" "media/$clip.mp4"; continue;;
+            esac
+            ffmpeg -nostdin -loglevel error -i "$source" -map 0:v:0 -map 0:a:0 -vf "scale=$size:flags=lanczos" -c:v libx264 -preset veryfast -pix_fmt yuv420p -b:v "$bitrate" -maxrate "$max" -bufsize "$max" "${audio[@]}" -map_metadata -1 -movflags +faststart "media/$clip.mp4"
+          done
+          for clip in media/*/*.mp4; do
+            ffprobe -v error -show_entries format=duration -of csv=p=0 "$clip"
+            test "$(stat -c%s "$clip")" -lt 104857600
+          done
+          google=https://raw.githubusercontent.com/google/fonts/main/ofl
+          curl -fsSL "$google/dmsans/DMSans%5Bopsz,wght%5D.ttf" -o fonts/dm-sans.ttf
+          curl -fsSL "$google/dmsans/OFL.txt" -o fonts/dm-sans-OFL.txt
+          curl -fsSL "$google/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf" -o fonts/playfair-display-italic.ttf
+          curl -fsSL "$google/playfairdisplay/OFL.txt" -o fonts/playfair-display-OFL.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- media fonts
+          git commit -m "Prepare local show videos and licensed fonts"
+          git push origin HEAD:prepare-epk-media
