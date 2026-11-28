@@ -40,24 +40,17 @@
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
-.statement-background {
-  background: linear-gradient(to bottom, rgb(18 25 38 / 55%), transparent 34%),
-    url("images/chorus-waves.webp") center / cover no-repeat #c0ad9f;
-  padding-top: clamp(16px, 2vw, 28px);
+.band-emblem {
+  display: grid;
+  place-items: center;
+  min-height: clamp(280px, 38vw, 620px);
+  background: #111619 url("images/band-emblem-background.webp") center / cover no-repeat;
 }
-.statement-logo {
+.band-emblem > img {
   display: block;
-  width: clamp(52px, 6vw, 80px);
+  width: clamp(112px, 16vw, 240px);
   height: auto;
-  margin: 0 auto clamp(16px, 2vw, 28px);
 }
-.statement h2 {
-  max-width: 67vw;
-  margin-inline: auto;
-  text-wrap: balance;
-}
-.statement.motion-panel { --panel-color: rgb(248 243 238 / 84%); }
-.statement.motion-panel::before { inset: 2% 16% 13%; }
 #about {
   display: block;
   padding: clamp(40px, 7vw, 112px) 6%;
@@ -237,8 +230,6 @@
     align-self: end;
     padding-bottom: clamp(24px, 7svh, 60px);
   }
-  .statement h2 { max-width: 100%; font-size: clamp(42px, 11vw, 65px); }
-  .statement.motion-panel::before { inset: 2% 3% 9%; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
